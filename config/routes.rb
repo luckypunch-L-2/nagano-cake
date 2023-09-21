@@ -8,6 +8,11 @@ Rails.application.routes.draw do
   registrations: "public/registrations",
   sessions: 'public/sessions'
 }
+  get "customers/my_page" => "customer#my_page"
+
+  get 'items' => 'public/items#index'
+  get 'items/:id' => 'public/items#show'
+
 
   # 管理者
   # URL /admin/sign_in ...
