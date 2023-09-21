@@ -1,10 +1,14 @@
 Rails.application.routes.draw do
+  root to: "public/homes#top"
+  get 'about' => 'public/homes#about'
+  
   #顧客
   # URL /customers/sign_in ...
   devise_for :customers, controllers: {
   registrations: "public/registrations",
   sessions: 'public/sessions'
 }
+  get "customers/my_page" => "customer#my_page"
 
   get 'items' => 'public/items#index'
   get 'items/:id' => 'public/items#show'
