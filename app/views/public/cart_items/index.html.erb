@@ -1,0 +1,42 @@
+<div class="container p-3">
+  <div class="row">
+    
+    <h4>ショッピングカート</h4>
+    <div class="ml-auto btn btn-danger">
+      カートを空にする
+    </div>
+  </div>
+  
+  <div class="row">
+    <table class="table-bordered">
+      
+      <thead>
+        <tr>
+          <th>商品名</th>
+          <th>単価(税込)</th> 
+          <th>数量</th>
+          <th>小計</th>
+          <th></th>
+        </tr>
+      </thead>
+      
+      <tbody>
+          <!-- each doする -->
+        <tr>
+          <td>画像＋商品名</td>
+          <td>1,100</td>
+          
+          <td>
+            <% form_with model: @cart_item do |f| %>
+              <% f.select :amount, [1,2,3,4,5,6,7,8,9] %>
+              <%= f.submit '変更', class: "btn btn-success" %>
+            <% end %>
+          </td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+        
+    </table>
+  </div>
+</div>
