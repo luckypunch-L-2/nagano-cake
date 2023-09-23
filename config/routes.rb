@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
+  scope module: :public do
+    resources :orders, only: [:new, :create, :index, :show]
+    post 'orders/confirm' => 'orders#confirm'
+    get 'orders/complete'
+  end
+
   root to: "public/homes#top"
   get 'about' => 'public/homes#about'
-  
+
   #顧客
   # URL /customers/sign_in ...
   devise_for :customers, controllers: {
