@@ -1,14 +1,19 @@
 Rails.application.routes.draw do
+  scope module: :public do
+    get "customers/my_page" => "customers#show"
+    get "customers/information/edit" => "customers#edit"
+    patch "customers/information" => "customers#update"
+  end
   root to: "public/homes#top"
   get 'about' => 'public/homes#about'
-  
+
   #顧客
   # URL /customers/sign_in ...
   devise_for :customers, controllers: {
   registrations: "public/registrations",
   sessions: 'public/sessions'
 }
-  get "customers/my_page" => "customer#my_page"
+
 
   get 'items' => 'public/items#index'
   get 'items/:id' => 'public/items#show'
