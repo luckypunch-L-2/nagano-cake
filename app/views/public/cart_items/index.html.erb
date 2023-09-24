@@ -1,0 +1,77 @@
+<div class="container p-5">
+  <div class="row">
+    
+    <h4>ショッピングカート</h4>
+    <div class="ml-auto btn btn-danger p-2">
+      カートを空にする
+    </div>
+  </div>
+  
+  <div class="row mt-5">
+    <table class="col-12 table-bordered">
+      
+      <thead>
+        <tr>
+          <th style="width: 40%">商品名</th>
+          <th style="width: 15%">単価(税込)</th> 
+          <th style="width: 15%">数量</th>
+          <th style="width: 15%">小計</th>
+          <th style="width: 15%"></th>
+        </tr>
+      </thead>
+      
+      <tbody>
+          <!-- each doする -->
+        <tr>
+          <td>画像＋商品名</td>
+          <td>1,100</td>
+          
+          <td>
+            
+            
+           <!-- 数量変更のselectボックス -->
+           選択ボック
+           <div class="btn btn-success">変更</div>
+           
+          </td>
+          <td>
+            
+            <!-- 税込*数量の小計 -->
+            1,100
+            
+          </td>
+          <td>
+            
+            <div class="col-10 m-3 btn btn-danger">削除する</div>
+            
+          </td>
+        </tr>
+      </tbody>
+        
+    </table>
+  </div>
+  
+  <div class="row mt-5">
+    <div class="col-2 ml-4">
+      <%= link_to "買い物を続ける", '/', class: "btn btn-primary" %>
+    </div>
+    
+      <table class="col-3 table-bordered ml-auto">
+        <tr>
+          <th style="width:50%">合計金額</th>
+          <th style="width:50%">
+            <!-- 小計の合計 -->
+            1,100
+          </th>
+        </tr>
+      </table>
+    
+  </div>
+  
+  <div class="row mt-5">
+    
+      <%= link_to "情報入力に進む", 'orders/new', class: "btn btn-success mx-auto" %>
+    
+  </div>
+  
+</div>
