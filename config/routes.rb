@@ -13,6 +13,9 @@ Rails.application.routes.draw do
     patch '/customers/withdrawal' => 'customers#withdrawal'
   end
 
+  namespace :admin do
+    resources :customers, only: [:index, :show, :edit, :update]
+  end
   #顧客
   # URL /customers/sign_in ...
   devise_for :customers, controllers: {
