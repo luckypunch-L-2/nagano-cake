@@ -1,10 +1,10 @@
 <div class="container p-5">
-  <div class="row">
-    <h4>商品一覧</h4>
+  <div class="row mb-3">
+    <h4 class="bg-light">　商品一覧　</h4>
 
-    <%= link_to "＋", new_admin_item_path, class: "btn btn-light rounded-circle  ml-auto shadow  p-2" %>
+    <%= link_to "＋", new_admin_item_path, class: "btn rounded-circle  ml-auto shadow  p-2" %>
   </div>
-  <table class="table">
+  <table class="table table-hover">
 
     <thead>
       <tr>
@@ -20,8 +20,12 @@
       <% @items.each do |item| %>
       <tr>
         <td><%= item.id %></td>
-        <td><%= item.name %></td>
-        <td><%= item.price %></td>
+        <td>
+          <%= link_to admin_item_path(item.id) do %>
+            <%= item.name %>
+          <% end %>
+        </td>
+        <td><%= item.price.to_s(:delimited) %></td>
         <td>ジャンル</td>
         <td>
           <% if item.is_active == true %>
