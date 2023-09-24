@@ -2,6 +2,8 @@
   <div class="row">
     <div class="col-sm-10 px-sm-0 mx-auto">
       <h2>配送先登録/一覧</h2>
+      <%= flash[:success] %>
+      <%= flash[:danger] %>
     </div>
   </div>
   <div class="row">
@@ -17,7 +19,7 @@
         <tr>
         <div class="form-group">
           <th><%= f.label :"住所" %></th>
-          <td><%= f.text_field :zip_code %></td>
+          <td><%= f.text_field :zip_code, :size=>"50" %></td>
         </div>
         </tr>
         <tr>

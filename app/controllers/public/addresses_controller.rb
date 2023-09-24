@@ -12,7 +12,7 @@ class Public::AddressesController < ApplicationController
       redirect_to addresses_path
     else
       flash[:danger] = "配送先の内容用に不備があります"
-      render :index
+      redirect_to addresses_path
     end
   end
 
