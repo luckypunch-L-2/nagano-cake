@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   root to: "public/homes#top"
   get 'about' => 'public/homes#about'
-  
+  scope module: :public do
+    resources :addresses, only: [:index, :create, :destroy, :edit, :update]
+  end
+
   #顧客
   # URL /customers/sign_in ...
   devise_for :customers, controllers: {
@@ -12,7 +15,6 @@ Rails.application.routes.draw do
 
   get 'items' => 'public/items#index'
   get 'items/:id' => 'public/items#show'
-
 
   # 管理者
   # URL /admin/sign_in ...
