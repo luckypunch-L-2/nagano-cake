@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  scope module: :public do
+    post 'orders/confirm' => 'orders#confirm'
+    get 'orders/complete' => 'orders#complete'
+    resources :orders, only: [:new, :create, :index, :show]
+  end
+
   root to: "public/homes#top"
   get 'about' => 'public/homes#about'
 
@@ -27,6 +33,12 @@ Rails.application.routes.draw do
 
   get 'items' => 'public/items#index'
   get 'items/:id' => 'public/items#show'
+  
+  scope module: :public do
+    resources :cart_items, only: [:index, :create, :update, :destroy]
+  end
+  
+  delete 'cart_items/destroy_all' => 'public/cart_items#desstroy_all'
 
   # 管理者
   # URL /admin/sign_in ...
