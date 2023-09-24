@@ -13,6 +13,10 @@ Rails.application.routes.draw do
   registrations: "public/registrations",
   sessions: 'public/sessions'
 }
+  #退会確認画面
+  get '/customers/confirm' => 'customers#confirm'
+  #退会処理
+  patch '/customers/withdrawal' => 'customers#withdrawal'
 
 
   get 'items' => 'public/items#index'
