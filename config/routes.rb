@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   scope module: :public do
-    resources :orders, only: [:new, :create, :index, :show]
     post 'orders/confirm' => 'orders#confirm'
     get 'orders/complete'
+    resources :orders, only: [:new, :create, :index, :show]
   end
 
   root to: "public/homes#top"

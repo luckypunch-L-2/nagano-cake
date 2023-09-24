@@ -10,7 +10,6 @@ class Public::OrdersController < ApplicationController
     @postage = 800
     @selected_payment_method = params[:order][:payment_method]
 
-    #商品合計額の計算
     ary = []
     @cart_items.each do |cart_item|
       ary << cart_item.item.price*cart_item.amount
@@ -87,7 +86,7 @@ class Public::OrdersController < ApplicationController
     @cart_items.destroy_all
     redirect_to complete_orders_path
   else
-    render.items
+    #render.items
   end
   end
 
@@ -96,8 +95,8 @@ class Public::OrdersController < ApplicationController
   end
 
   def show
-    #@order = Order.find(params[:id])
-    #@order_details = OrderDetail.where(order_id: @order.id)
+    @order = Order.find(params[:id])
+    @order_details = OrderDetail.where(order_id: @order.id)
   end
 
   def complete
