@@ -94,6 +94,11 @@ ActiveRecord::Schema.define(version: 2023_09_20_084744) do
   end
 
   create_table "items", force: :cascade do |t|
+    t.integer "genre_id"
+    t.string "name"
+    t.text "explanation"
+    t.integer "price"
+    t.boolean "is_active", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
