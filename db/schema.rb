@@ -41,13 +41,10 @@ ActiveRecord::Schema.define(version: 2023_09_20_084744) do
   end
 
   create_table "addresses", force: :cascade do |t|
-    t.string "admin"
-    t.string "cart_item"
-    t.string "customer"
-    t.string "genre"
-    t.string "item"
-    t.string "order"
-    t.string "order_detail"
+    t.integer "customer_id", null: false
+    t.string "zip_code", null: false
+    t.string "address", null: false
+    t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
