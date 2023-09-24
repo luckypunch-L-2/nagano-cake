@@ -1,14 +1,16 @@
 Rails.application.routes.draw do
-  scope module: :public do
-    get "customers/my_page" => "customers#show"
-    get "customers/information/edit" => "customers#edit"
-    patch "customers/information" => "customers#update"
-  end
   root to: "public/homes#top"
   get 'about' => 'public/homes#about'
 
   scope module: :public do
+    get "customers/my_page" => "customers#show"
+    get "customers/information/edit" => "customers#edit"
+    patch "customers/information" => "customers#update"
     resources :addresses, only: [:index, :create, :destroy, :edit, :update]
+    #退会確認画面
+    get '/customers/confirm' => 'customers#confirm'
+    #退会処理
+    patch '/customers/withdrawal' => 'customers#withdrawal'
   end
 
   #顧客
@@ -17,10 +19,7 @@ Rails.application.routes.draw do
   registrations: "public/registrations",
   sessions: 'public/sessions'
 }
-  #退会確認画面
-  get '/customers/confirm' => 'customers#confirm'
-  #退会処理
-  patch '/customers/withdrawal' => 'customers#withdrawal'
+
 
 
   get 'items' => 'public/items#index'
