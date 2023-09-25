@@ -12,7 +12,7 @@ class Public::OrdersController < ApplicationController
 
     ary = []
     @cart_items.each do |cart_item|
-      ary << cart_item.item.price*cart_item.amount
+      ary << cart_item.item.price * cart_item.amount
     end
     @cart_items_price = ary.sum
 
