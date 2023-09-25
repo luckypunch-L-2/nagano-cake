@@ -1,0 +1,54 @@
+<div class="container p-5">
+  <div class="row mb-3">
+    <h4 class="bg-light">　商品一覧　</h4>
+
+    <%= link_to "＋", new_admin_item_path, class: "btn rounded-circle  ml-auto shadow  p-2" %>
+  </div>
+  <table class="table table-hover">
+
+    <thead>
+      <tr>
+        <th>商品ID</th>
+        <th>商品名</th>
+        <th>税抜価格</th>
+        <th>ジャンル</th>
+        <th>ステータス</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @items.each do |item| %>
+      <tr>
+        <td><%= item.id %></td>
+        <td>
+          <%= link_to admin_item_path(item.id) do %>
+            <%= item.name %>
+          <% end %>
+        </td>
+        <td><%= item.price.to_s(:delimited) %></td>
+        <td>ジャンル</td>
+        <td>
+          <% if item.is_active == true %>
+            <div class="text-success">
+              販売中
+            </div>
+          <% else %>
+            <div class="text-danger">
+              販売停止中
+            </div>
+          <% end %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+
+  </table>
+
+  <div class="row">
+    <div class="mx-auto">
+      <%= paginate @items %>
+    </div>
+  </div>
+
+</div>
+
