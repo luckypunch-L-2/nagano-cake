@@ -1,0 +1,70 @@
+<div class="container p-3">
+  <div class="row">
+    <h3>注文情報確認</h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>商品名</th>
+            <th>単価(税込)</th>
+            <th>数量</th>
+            <th>小計</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @cart_items.each do |cart_item| %>
+          <tr>
+            <td><strong><%= cart_item.item.price %></td>
+            <td><%= cart_item.item.price %></td>
+            <td><%= cart_item.amount %></td>
+            <td><%= cart_item.item.price*cart_item.amount %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>送料</td>
+            <td><%= @postage %></td>
+          </tr>
+          <tr>
+            <td>商品合計</td>
+            <td><%= @cart_items_price %></td>
+          </tr>
+          <tr>
+            <td>請求金額</td>
+            <td><%= @total_price %></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h4>支払い方法</h4>
+        <% if @selected_payment_method == "credit_card" %>
+          クレジットカード
+        <% else %>
+          銀行振込
+        <% end %>
+
+      <h4>お届け先</h4>
+      <%= @selected_address %>
+
+      <%= form_with url: orders_complete_path, method: :get do %>
+
+        <%= hidden_field_tag 'order[payment_method]', @selected_payment_method %>
+        <%= hidden_field_tag 'order[address_type]', @address_type %>
+
+        <% if @address_type == "registered_address" %>
+          <%= hidden_field_tag 'order[registered_address_id]', params[:order][:registered_address_id] %>
+        <% elsif @address_type == "new_address" %>
+          <%= hidden_field_tag 'order[new_zip_code]', params[:order][:new_zip_code] %>
+          <%= hidden_field_tag 'order[new_address]', params[:order][:new_address] %>
+          <%= hidden_field_tag 'order[new_name]', params[:order][:new_name] %>
+        <% end %>
+
+        <%= submit_tag "注文を確定する", class: "btn btn-success" %>
+      <% end %>
+    </div>
+
+  </div>
+</div>
