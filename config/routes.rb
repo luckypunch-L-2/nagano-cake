@@ -29,6 +29,10 @@ Rails.application.routes.draw do
     resources :cart_items, only: [:index, :create, :update, :destroy]
   end
 
+  namespace :admin do
+    resources :customers, only: [:index, :show, :edit, :update]
+  end
+
   #顧客
   # URL /customers/sign_in ...
   devise_for :customers, controllers: {
@@ -36,13 +40,28 @@ Rails.application.routes.draw do
   sessions: 'public/sessions'
   }
 
+  get 'items' => 'public/items#index'
+  get 'items/:id' => 'public/items#show'
+
+  scope module: :public do
+    resources :cart_items, only: [:index, :create, :update, :destroy]
+  end
+
+
   delete 'cart_items/destroy_all' => 'public/cart_items#desstroy_all'
 
+  namespace :admin do
+    resources :customers, only: [:index, :show, :edit, :update]
+  end
   # 管理者
   # URL /admin/sign_in ...
   devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   sessions: "admin/sessions"
   }
+
+  namespace :admin do
+    resources :items, only: [:index, :new, :create, :show, :edit, :update]
+  end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
