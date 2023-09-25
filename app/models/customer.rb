@@ -9,4 +9,5 @@ class Customer < ApplicationRecord
   end
 
   has_many :addresses, dependent: :destroy
+  
 end
