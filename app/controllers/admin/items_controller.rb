@@ -1,4 +1,6 @@
 class Admin::ItemsController < ApplicationController
+  #before_action :authenticate_admin!
+  before_action :set_item, only: %i[show edit update]
 
   def index
     @items = Item.all.page(params[:page]).per(10)
@@ -9,10 +11,14 @@ class Admin::ItemsController < ApplicationController
   end
 
   def create
-    item = Item.new(item_params)
-    item.save
-    redirect_to admin_item_path(item.id)
+    @item = Item.new(item_params)
+    if @item.save
+     redirect_to admin_item_path(@item.id)
+    else
+      render :new
+    end
   end
+   
 
   def show
     @item = Item.find(params[:id])
@@ -30,6 +36,9 @@ class Admin::ItemsController < ApplicationController
     redirect_to admin_item_path(@item)
   end
 
+  def set_item
+    @item = Item.find(params[:id])
+  end
 
   private
 
