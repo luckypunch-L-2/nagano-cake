@@ -37,9 +37,6 @@ Rails.application.routes.draw do
     patch '/customers/withdrawal' => 'customers#withdrawal'
   end
 
-  scope module: :public do
-    resources :cart_items, only: [:index, :create, :update, :destroy]
-  end
 
   namespace :admin do
     resources :customers, only: [:index, :show, :edit, :update]
@@ -57,14 +54,14 @@ Rails.application.routes.draw do
     resources :items, only: [:index, :show]
   end
 
- delete 'cart_items/destroy_all' => 'public/cart_items#destroy_all'
+
 
   scope module: :public do
+    delete 'cart_items/destroy_all' => 'cart_items#destroy_all'
     resources :cart_items, only: [:index, :create, :update, :destroy]
   end
 
-  get 'items' => 'public/items#index'
-  get 'items/:id' => 'public/items#show'
+ 
 
 
   # 管理者

@@ -31,12 +31,12 @@ class Public::CartItemsController < ApplicationController
         elsif @cart_item.save
             redirect_to cart_items_path
         else# 保存できなかった場合
-            redirect_to item_path(item_id)
+            redirect_to cart_items_path
         end
   end
 
   def destroy
-    cart_item = CartItem.find(params[:id])
+    cart_item = current_customer.cart_items.find(params[:id])
     cart_item.destroy
     redirect_to cart_items_path
   end
