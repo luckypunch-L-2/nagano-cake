@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  namespace :admin do
+    resources :orders, only: [:show]
+  end
+
   scope module: :public do
     post 'orders/confirm' => 'orders#confirm'
     get 'orders/complete' => 'orders#complete'
@@ -51,17 +55,7 @@ Rails.application.routes.draw do
   get 'items' => 'public/items#index'
   get 'items/:id' => 'public/items#show'
 
-  scope module: :public do
-    resources :cart_items, only: [:index, :create, :update, :destroy]
-  end
-
-
-
   delete 'cart_items/destroy_all' => 'public/cart_items#desstroy_all'
-
-  namespace :admin do
-    resources :customers, only: [:index, :show, :edit, :update]
-  end
 
   # 管理者
   # URL /admin/sign_in ...
