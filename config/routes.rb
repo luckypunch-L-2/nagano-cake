@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  namespace :admin do
+    resources :orders, only: [:show]
+  end
+  
   scope module: :public do
     post 'orders/confirm' => 'orders#confirm'
     get 'orders/complete' => 'orders#complete'

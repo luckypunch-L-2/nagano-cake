@@ -56,7 +56,6 @@ class Public::OrdersController < ApplicationController
     else
       @order.status = 0
     end
-
   address_type = params[:order][:address_type]
   case address_type
   when "customer_address"
@@ -88,7 +87,7 @@ class Public::OrdersController < ApplicationController
     @cart_items.destroy_all
     redirect_to complete_orders_path
   else
-    #render.items
+    render.items
   end
   end
 
@@ -107,7 +106,7 @@ class Public::OrdersController < ApplicationController
   private
 
   def order_params
-  params.require(:order).permit(:payment_method, :zip_code, :address, :name)
+    params.require(:order).permit(:payment_method, :zip_code, :address, :name)
   end
 
 end
