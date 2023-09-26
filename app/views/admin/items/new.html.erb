@@ -31,7 +31,7 @@
       <div class="row justify-content-center mb-2">
         <label class="col-2">ジャンル</label>
         <div class="col-4">
-          選択ボックス
+          選択ボックス<%= f.collection_select(:genre_id, Genre.all, :id, :name, {}, {class:"select-box", id:"mentor-skill"}) %>
         </div>
       </div>
 
@@ -45,10 +45,10 @@
       <div class="row justify-content-center mb-4">
         <label class="col-2">販売ステータス</label>
         <div class="col-4">
-          
+
           <%= f.radio_button :is_active, :true %>
           <%= f.label :is_active_true, "販売中" %>
-          
+
           <%= f.radio_button :is_active, :false %>
           <%= f.label :is_active_false, "販売停止中" %>
         </div>
