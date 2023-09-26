@@ -6,7 +6,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def confirm
-    @cart_items = CartItems.where(customer_id: current_customer.id)
+    @cart_items = current_customer.cart_items.all
     @postage = 800
     @selected_payment_method = params[:order][:payment_method]
 
@@ -22,7 +22,7 @@ class Public::OrdersController < ApplicationController
     @address_type = params[:order][:address_type]
     case @address_type
     when "customer_address"
-      @selected_address = currnet_customer.zip_code + " " + currnet_customer.address + " " + current_customer.last_name + current_customer.first_name
+      @selected_address = current_customer.zip_code + " " + current_customer.address + " " + current_customer.last_name + current_customer.first_name
     when "registered_address"
       unless params[:order][:registered_address_id] == " "
         selected = Address.find(params[:order][:registered_address_id])
@@ -56,7 +56,6 @@ class Public::OrdersController < ApplicationController
     else
       @order.status = 0
     end
-
   address_type = params[:order][:address_type]
   case address_type
   when "customer_address"
@@ -88,7 +87,7 @@ class Public::OrdersController < ApplicationController
     @cart_items.destroy_all
     redirect_to complete_orders_path
   else
-    #render.items
+    render.items
   end
   end
 
@@ -98,7 +97,7 @@ class Public::OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
-    @order_details = OrderDetail.where(order_id: @order.id)
+    @order_details = @order.order_details
   end
 
   def complete
@@ -107,7 +106,7 @@ class Public::OrdersController < ApplicationController
   private
 
   def order_params
-  params.require(:order).permit(:payment_method, :zip_code, :address, :name)
+    params.require(:order).permit(:payment_method, :zip_code, :address, :name)
   end
 
 end
