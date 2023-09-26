@@ -1,13 +1,24 @@
-<!-- ジャンル検索format -->
-<%= render 'genre_search' %>
+<div class="container p-5">
+  <div class="row justify-content-center">
 
-<div>
-  <h2>商品一覧</h2>
-  <p>(全x件)</p>
-</div>
-  <!--  @items.count -->
+    <div class="col-2 mr-3">
+      <%= render 'genre_search' %>
+    </div>
 
-<!-- indexのformat -->
-<div>
-  <%= render 'index' %>
+    <div class="col-9">
+      <div class="row mb-5">
+        <h3><strong>商品一覧</strong></h3>
+        <div class="align-self-center">
+          　(全<%= @item.count %>件)
+        </div>
+      </div>
+      <%= render 'index' %>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="mx-auto">
+      <%= paginate @items %>
+    </div>
+  </div>
 </div>
