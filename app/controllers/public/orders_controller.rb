@@ -13,7 +13,7 @@ class Public::OrdersController < ApplicationController
     ary = []
     @cart_items.each do |cart_item|
 
-      ary << cart_item.item.price * cart_item.amount
+      ary << cart_item.item.add_tax_price * cart_item.amount
 
     end
     @cart_items_price = ary.sum
@@ -41,7 +41,7 @@ class Public::OrdersController < ApplicationController
 
   def create
     @order = Order.new
-    @order.customer_id = currnet_customer.id
+    @order.customer_id = current_customer.id
     @order.postage = 800
     @cart_items = CartItem.where(customer_id: current_customer.id)
     ary = []
@@ -60,8 +60,8 @@ class Public::OrdersController < ApplicationController
   case address_type
   when "customer_address"
     @order.zip_code = current_customer.zip_code
-    @order.address = currnet_customer.address
-    @order.name = currnet_customer.last_name + currnet_customer.first_name
+    @order.address = current_customer.address
+    @order.name = current_customer.last_name + current_customer.first_name
   when "registered_address"
     Address.find(params[:order][:registered_address_id])
     selected = Address.find(params[:order][:registered_address_id])
@@ -85,7 +85,7 @@ class Public::OrdersController < ApplicationController
       end
     end
     @cart_items.destroy_all
-    redirect_to complete_orders_path
+    redirect_to orders_complete_path
   else
     render.items
   end
@@ -96,7 +96,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def show
-    @order = Order.find(params[:id])
+    @order = Order.find()
     @order_details = @order.order_details
   end
 
