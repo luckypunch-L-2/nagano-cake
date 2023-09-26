@@ -17,8 +17,6 @@ Rails.application.routes.draw do
   root to: "public/homes#top"
   get 'about' => 'public/homes#about'
 
-  get 'items' => 'public/items#index'
-  get 'items/:id' => 'public/items#show'
 
   scope module: :public do
     post 'orders/confirm' => 'orders#confirm'
@@ -57,11 +55,9 @@ Rails.application.routes.draw do
 
 
   scope module: :public do
-    delete 'cart_items/destroy_all' => 'cart_items#destroy_all'
     resources :cart_items, only: [:index, :create, :update, :destroy]
   end
 
- 
 
 
   # 管理者
