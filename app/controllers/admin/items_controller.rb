@@ -22,7 +22,7 @@ class Admin::ItemsController < ApplicationController
 
   end
 
-  
+
   def show
     @item = Item.find(params[:id])
   end
@@ -33,6 +33,7 @@ class Admin::ItemsController < ApplicationController
   def edit
     @item = Item.find(params[:id])
     @genres = Genre.all
+  end
 
 
 
