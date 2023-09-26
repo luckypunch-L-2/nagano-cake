@@ -1,17 +1,17 @@
 <div class="container p-5">
   <div class="row ml-3 mb-5">
-    
+
     <h4>商品詳細</h4>
-    
+
   </div>
-  
+
   <div class="row">
     <div class="col-4">
         <%= image_tag @item.image, size: "250x200" %>
     </div>
-    
+
     <div class="col-8">
-      
+
       <div class="row">
         <div class="col-3 text-center">
           商品名
@@ -20,7 +20,7 @@
           <%= @item.name %>
         </div>
       </div>
-      
+
       <div class="row my-4">
         <div class="col-3 text-center">
           商品説明
@@ -29,16 +29,16 @@
           <%= @item.explanation %>
         </div>
       </div>
-      
+
       <div class="row">
         <div class="col-3 text-center">
           ジャンル
         </div>
         <div class="col-4">
-          <%#= @item %>
+          <%= @item.genre.name %>
         </div>
       </div>
-      
+
       <div class="row my-4">
         <div class="col-3 text-center">
           税込価格<br>
@@ -49,7 +49,7 @@
           (<%= @item.price.to_s(:delimited) %>)　円
         </div>
       </div>
-    
+
       <div class="row mb-4">
         <div class="col-3 text-center">
           販売ステータス
@@ -68,10 +68,10 @@
       </div>
     </div>
   </div>
-    
+
     <div class="row my-3">
       <%= link_to "　編集する　", edit_admin_item_path(@item.id), class: "btn btn-success mx-auto" %>
     </div>
-    
-  
+
+
 </div>
