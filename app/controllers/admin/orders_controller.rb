@@ -1,6 +1,7 @@
 class Admin::OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
+    @customer = Customer.find(params[:id])
     @order_details = @order.order_details
   end
 
@@ -8,7 +9,7 @@ class Admin::OrdersController < ApplicationController
   @order = Order.find(params[:id])
   @order_details = OrderDetail.where(order_id: params[:id])
   if @order.update(order_params)
-    @order_details.update_all(making_status: 1) if @order.status == "payment_confirmation"
+    @order_details.update_all(maiking_status: 1) if @order.status == "payment_confirmation"
   end
     redirect_to admin_order_path(@order)
   end
