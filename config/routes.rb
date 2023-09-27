@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   root to: "public/homes#top"
   get 'about' => 'public/homes#about'
 
+
   get '/genre/search' => 'searches#genre_search'
 
   scope module: :public do

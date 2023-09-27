@@ -44,9 +44,12 @@ class Public::OrdersController < ApplicationController
     @order.customer_id = current_customer.id
     @order.postage = 800
     @cart_items = CartItem.where(customer_id: current_customer.id)
+
     ary = []
     @cart_items.each do |cart_item|
-      ary << cart_item.item.price*cart_item.amount
+
+      ary << cart_item.item.add_tax_price * cart_item.amount
+
     end
     @cart_items_price = ary.sum
     @order.total_payment = @order.postage + @cart_items_price
