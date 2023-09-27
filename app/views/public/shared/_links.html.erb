@@ -1,0 +1,22 @@
+<%- if controller_name != 'sessions' %>
+  <div class="row mb-2">
+    <h5 style="background-color: #dcdcdc;"><strong>既に登録済みの方</strong></h5>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-10">
+      <%= link_to "こちら", new_session_path(resource_name) %>　 からログインしてください。
+    </div>
+  </div>
+<% end %>
+
+<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+  <div class="row mb-3">
+    <div style="background-color: #dcdcdc;"><strong>会員登録がお済みでない方</strong></div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-10">
+      <%= link_to "こちら", new_registration_path(resource_name) %> 　から新規登録を行ってください。
+    </div>
+  </div>
+<% end %>

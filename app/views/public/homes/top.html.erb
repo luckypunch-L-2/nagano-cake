@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row">
+
+    <div class="col-md-6">
+
+      <%= render 'public/searches/genre', genres: @genres %>
+    </div>
+
+    <div class="col-md-8" style="background-image: url(<%= asset_path('13-5.jpg') %>)">
+
+      <p>
+        ようこそ、ながのCAKEへ！<br>
+        このサイトは、ケーキ販売のECサイトになります。<br>
+        会員ではない方も商品の閲覧はできますが、<br>
+        購入には会員登録が必要になります。
+      </p>
+
+      <h2><strong>新着商品</strong></h2>
+    <div>
+      <% @items.each do |item| %>
+        <div>
+          <%= link_to item_path(item.id) do %>
+            <%= image_tag item.image, size: "160x120" %><br>
+          <% end %>
+          <strong><%= item.name %></strong><br>
+          <strong><%= item.add_tax_price.to_s(:delimited) %></strong>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+</div>
+  <div class="row">
+    <div class="mx-auto col-11 col-sm-10 col-lg-8 col-xl-10">
+      <div class="text-right">
+        <a href="items">すべての商品を見る></a>
+      </div>
+    </div>
+  </div>
+  </div>
