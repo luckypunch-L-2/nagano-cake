@@ -99,7 +99,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def show
-    @order = Order.find(params[:id])
+    @order = Order.find()
     @order_details = @order.order_details
   end
 
