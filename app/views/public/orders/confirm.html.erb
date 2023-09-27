@@ -1,70 +1,99 @@
-<div class="container p-3">
+<div class="container p-5">
   <div class="row">
-    <h3>注文情報確認</h3>
-      <table class="table">
+    <h3 style="background-color: #dcdcdc;">注文情報確認</h3>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-lg-8">
+      <table class="col-12" style="font-size: 15pt" border="1" bordercolor="#000000">
         <thead>
-          <tr>
-            <th>商品名</th>
-            <th>単価(税込)</th>
-            <th>数量</th>
-            <th>小計</th>
+          <tr bgcolor="#dcdcdc">
+            <th style="width: 55%">商品名</th>
+            <th style="width: 15%">単価(税込)</th>
+            <th style="width: 15%">数量</th>
+            <th style="width: 15%">小計</th>
           </tr>
         </thead>
         <tbody>
         <% @cart_items.each do |cart_item| %>
           <tr>
-            <td><strong><%= cart_item.item.price %></td>
-            <td><%= cart_item.item.price %></td>
+            <td>
+              <%= image_tag cart_item.item.image, size: "20x15" %>
+              <strong><%= cart_item.item.name %>
+            </td>
+            <td><%= cart_item.item.add_tax_price.to_s(:delimited) %></td>
             <td><%= cart_item.amount %></td>
-            <td><%= cart_item.item.price*cart_item.amount %></td>
+            <td><%= cart_item.subtotal.to_s(:delimited) %></td>
           </tr>
         <% end %>
         </tbody>
       </table>
-
-      <table class="table">
-        <tbody>
-          <tr>
-            <td>送料</td>
-            <td><%= @postage %></td>
-          </tr>
-          <tr>
-            <td>商品合計</td>
-            <td><%= @cart_items_price %></td>
-          </tr>
-          <tr>
-            <td>請求金額</td>
-            <td><%= @total_price %></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <h4>支払い方法</h4>
-        <% if @selected_payment_method == "credit_card" %>
-          クレジットカード
-        <% else %>
-          銀行振込
-        <% end %>
-
-      <h4>お届け先</h4>
-      <%= @selected_address %>
-
-      <%= form_with url: orders_complete_path, method: :get do %>
-
-        <%= hidden_field_tag 'order[payment_method]', @selected_payment_method %>
-        <%= hidden_field_tag 'order[address_type]', @address_type %>
-
-        <% if @address_type == "registered_address" %>
-          <%= hidden_field_tag 'order[registered_address_id]', params[:order][:registered_address_id] %>
-        <% elsif @address_type == "new_address" %>
-          <%= hidden_field_tag 'order[new_zip_code]', params[:order][:new_zip_code] %>
-          <%= hidden_field_tag 'order[new_address]', params[:order][:new_address] %>
-          <%= hidden_field_tag 'order[new_name]', params[:order][:new_name] %>
-        <% end %>
-
-        <%= submit_tag "注文を確定する", class: "btn btn-success" %>
-      <% end %>
     </div>
 
+    <div class="col-lg-4">
+      <table class="col-12" style="font-size: 15pt" border="1" bordercolor="#000000">
+        <tr>
+          <td style="width: 50%" bgcolor="#dcdcdc">送料</td>
+          <td style="width: 50%"><%= @postage %></td>
+        </tr>
+        <tr>
+          <td style="width: 50%" bgcolor="#dcdcdc">商品合計</td>
+          <td style="width: 50%"><%= @cart_items_price %></td>
+        </tr>
+        <tr>
+          <td style="width: 50%" bgcolor="#dcdcdc">請求金額</td>
+          <td style="width: 50%"><%= @total_payment %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-lg-8">
+      <table class="col-12" style="font-size: 15pt">
+        <tr>
+          <th style="width: 15%"><strong>支払方法</strong></th>
+          <th style="width: 85%">
+            <% if @selected_payment_method == "credit_card" %>
+              クレジットカード
+            <% else %>
+              銀行振込
+            <% end %>
+          </th>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-lg-8">
+      <table class="col-12" style="font-size: 15pt">
+        <tr>
+          <td style="width: 15%"><strong>お届け先</strong></td>
+          <td style="width: 85%">
+            〒
+            <%= @selected_address %>
+
+            <%= form_with url: orders_path, method: :post do %>
+
+            <%= hidden_field_tag 'order[payment_method]', @selected_payment_method %>
+            <%= hidden_field_tag 'order[address_type]', @address_type %>
+
+            <% if @address_type == "registered_address" %>
+              <%= hidden_field_tag 'order[registered_address_id]', params[:order][:registered_address_id] %>
+            <% elsif @address_type == "new_address" %>
+              <%= hidden_field_tag 'order[new_zip_code]', params[:order][:new_zip_code] %>
+              <%= hidden_field_tag 'order[new_address]', params[:order][:new_address] %>
+              <%= hidden_field_tag 'order[new_name]', params[:order][:new_name] %>
+            <% end %>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <%= submit_tag "注文を確定する", class: "btn btn-success mx-auto" %>
+    <% end %>
   </div>
 </div>
