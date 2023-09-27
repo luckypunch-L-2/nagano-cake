@@ -2,23 +2,42 @@
   <div class="row justify-content-center">
 
     <div class="col-2 mr-3">
-      <%= render 'genre_search' %>
+      <%= render 'public/searches/genre', genres: @genres %>
     </div>
-
-    <div class="col-9">
-      <div class="row mb-5">
-        <h3><strong>商品一覧</strong></h3>
-        <div class="align-self-center">
-          　(全<%= @item.count %>件)
+    
+    <% if @genred_items.any? %>
+    
+      <div class="container">
+        <div class="row">
+          <% @genred_items.each do |genred_item| %>
+            <div class="col-3 mb-2">
+            <%= link_to item_path(genred_item) do %>
+              <%= image_tag genred_item.image, size: "160x120" %><br>
+            <% end %>
+              <strong><%= genred_item.name %></strong><br>
+              <strong><%= genred_item.add_tax_price.to_s(:delimited) %></strong>
+            </div>
+          <% end %>
         </div>
       </div>
-      <%= render 'index' %>
-    </div>
-  </div>
+    <% elsif params[:genre_id].present? %> 
+      <h3>商品がありません</h3>
+    <% else %>
+        <div class="col-9">
+          <div class="row mb-5">
+            <h3><strong>商品一覧</strong></h3>
+            <div class="align-self-center">
+          　    (全<%= @item.count %>件)
+            </div>
+          </div>
+          <%= render 'index' %>
+        </div>
+      </div>
 
-  <div class="row mt-5">
-    <div class="mx-auto">
-      <%= paginate @items %>
+      <div class="row mt-5">
+        <div class="mx-auto">
+          <%= paginate @items %>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
+    <% end %>

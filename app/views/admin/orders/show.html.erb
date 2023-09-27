@@ -16,12 +16,12 @@
 
       <tr>
         <th><strong>配送先</strong></th>
-        <th>〒<%= @order.customer.zip_code + " " + @order.customer.address + " " + @order.customer.name %></th>
+        <th>〒<%= @order.customer.zip_code + " " + @order.customer.address + " " + @order.customer.last_name + " " + @order.customer.first_name %></th>
       </tr>
 
       <tr>
         <th><strong>支払方法</strong></th>
-        <th><%= @order.customer.payment_method_i18n %></th>
+        <th><%= @order.payment_method_i18n %></th>
       </tr>
 
       <tr>
@@ -29,7 +29,7 @@
         <th>
           <%= form_with model: @order, url: admin_order_path, method: :patch, local: true do |f| %>
             <%= f.select :status, Order.statuses.keys, class: "order_status" %>
-            <%= f.submit "更新" , class: "btn btn-outline-success" %>
+            <%= f.submit "更新" , class: "btn btn-success" %>
           <% end %>
         </th>
       </tr>
@@ -51,7 +51,7 @@
         <% @order_details.each do |order_detail| %>
         <tr>
           <th><%= order_detail.item.name %></th>
-          <th><%= order_detail.item.price %></th>
+          <th><%= order_detail.item.add_tax_price.to_s(:delimited) %></th>
           <th><%= order_detail.amount %></th>
           <th><%= order_detail.amount * order_detail.item.price %></th>
           <th>

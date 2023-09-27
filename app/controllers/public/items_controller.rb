@@ -4,6 +4,8 @@ before_action :authenticate_customer!, only: [:show]
   def index
     @item = Item.all
     @items = Item.all.page(params[:page]).per(8)
+    @genres = Genre.all
+    @genred_items = Item.where(genre_id: params[:genre_id])
   end
 
   def show
