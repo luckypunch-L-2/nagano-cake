@@ -1,9 +1,9 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-4">
-      <%= render 'public/items/genre_search' %>
+    <div class="col-md-6">
+      <%= render 'public/searches/genre', genres: @genres %>
     </div>
-    <div class="col-md-8" style="background-image('no_image.jpg')">
+    <div class="col-md-8" style="background-image: url(<%= asset_path('13-5.jpg') %>)">
       <p>
         ようこそ、ながのCAKEへ！<br>
         このサイトは、ケーキ販売のECサイトになります。<br>
@@ -32,4 +32,5 @@
         <a href="items">すべての商品を見る></a>
       </div>
     </div>
+  </div>
   </div>
